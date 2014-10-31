@@ -1,0 +1,107 @@
+
+<div class="container" onload="updatereport()">
+	<header class="row alert alert-info page-header header">
+		<h3 class="row">
+			<div class="col-md-10">Email Broadcaster</div>
+            <%= link_to raw("<div class='col-md-2 btn-primary btn'>Dashboard</div>"),rails_admin_path %>
+		</h3>
+	</header>
+	<div id="sortable">
+
+    <div class="row panel panel-primary">
+	<div class="panel-heading">
+	Active Accounts
+	</div>
+	<table class="addresses table table-bordered table-striped panel-body">
+		<tr >
+			<th>
+				Email
+			</th>
+			<th>
+				Name
+			</th>
+			<th>
+				Age
+			</th>
+			<th>
+				Gender
+			</th>
+			<th>
+				Salary
+			</th>
+			<th>
+				Active
+			</th>
+			<th>
+				Priority
+			</th>
+		</tr>
+		<% @active_accounts.each do|account| %>
+		<tr >
+			<td>
+				<%= account.email %>
+			</td>
+			<td>
+				<%= account.name %>
+			</td>
+			<td>
+				<%= account.age %>
+			</td>
+			<td>
+				<%= account.gender %>
+			</td>
+			<td>
+				<%= account.salary %>
+			</td>
+			<td>
+				<%= account.email_status %>
+			</td>
+			<td>
+				<%= account.priority %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+</div>
+<div class="row panel panel-primary ">
+	<div class="panel-heading">
+		Upload XL File
+	</div>
+	<div class="panel-body ">
+		<div class="up-file">
+			
+		</div>
+		<hr>
+		
+		
+		 <% @email_files.each do|efile| %>
+		  <div class="row">
+		  <div class="col-md-1" >
+		  	<%= efile.name %>
+		  </div>
+		  <div class="col-md-3 to<%= efile.id %>" >
+		  	From:<%= text_field_tag(:to) %>
+		  </div>
+		  <div class="col-md-3 from<%= efile.id %>" >
+		    To:<%= text_field_tag(:from) %>
+		  </div>
+		  <div class="btn btn-primary col-md-3" id="file<%= efile.id %>" onclick="up_file_report(this)">
+		  	Update Database
+		  </div>
+		  <div class="btn btn-primary col-md-2" id="check<%= efile.id %>" onclick="check_file_report(this)">
+		  	Verify Emails
+		  </div>
+		  </div>
+		  <% end %>
+		  <hr>
+		  <div class="up-file_report">
+		  	
+		  </div>
+		
+		
+	</div>
+</div>
+
+</div>
+</div>
+<%= subscribe_to "/messages/new" %>
